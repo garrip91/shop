@@ -22,26 +22,27 @@ class NotebookAdminForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['image'].help_text = mark_safe(
-            '<span style="color:red; font-size:14px;">Загружайте изображение с минимальным разрешением {}x{}</span>'.format(
-                *Product.MIN_RESOLUTION
+            """<span style="color:red; font-size:14px;">При загрузке изображения с разрешением больше {}x{} оно будет обрезано!</span>
+            """.format(
+                *Product.MAX_RESOLUTION
             )
         )
         
-    def clean_image(self):
-        image = self.cleaned_data['image']
-        img = Image.open(image)
-        #print(img.width, img.height)
+    # def clean_image(self):
+        # image = self.cleaned_data['image']
+        # img = Image.open(image)
+        # #print(img.width, img.height)
         
-        min_height, min_width = Product.MIN_RESOLUTION
-        max_height, max_width = Product.MAX_RESOLUTION
-        if image.size > Product.MAX_IMAGE_SIZE:
-            raise ValidationError("Размер загружаемого изображения не должен превышать 3Mb!")
-        if img.height < min_height or img.width < min_width:
-            raise ValidationError("Разрешение загружаемого изображения меньше минимального!")
-        if img.height > max_height or img.width > max_width:
-            raise ValidationError("Разрешение загружаемого изображения больше максимального!")
+        # min_height, min_width = Product.MIN_RESOLUTION
+        # max_height, max_width = Product.MAX_RESOLUTION
+        # if image.size > Product.MAX_IMAGE_SIZE:
+            # raise ValidationError("Размер загружаемого изображения не должен превышать 3Mb!")
+        # if img.height < min_height or img.width < min_width:
+            # raise ValidationError("Разрешение загружаемого изображения меньше минимального!")
+        # if img.height > max_height or img.width > max_width:
+            # raise ValidationError("Разрешение загружаемого изображения больше максимального!")
         
-        return image
+        # return image
 
 
 
