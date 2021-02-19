@@ -1,7 +1,8 @@
 #from django import forms:
 from PIL import Image
 
-from django.forms import ModelChoiceField, ModelForm, ValidationError
+#from django.forms import ModelChoiceField, ModelForm, ValidationError
+from django.forms import ModelChoiceField
 
 from django.contrib import admin
 
@@ -12,7 +13,7 @@ from .models import *
 
 
 # ПЕРЕОПРЕДЕЛЯЕМ НАЗВАНИЕ ЗАГРУЖЕННОГО ФАЙЛА (ИСКЛЮЧАЕМ ИЗ НЕГО ЛИШНИЕ СИМВОЛЫ, ДОБАВЛЯЕМЫЕ Django):
-
+'''
 class NotebookAdminForm(ModelForm):
 
     # Перенесено в тело класса (модели) 'Product' в models.py:
@@ -27,7 +28,7 @@ class NotebookAdminForm(ModelForm):
                 *Product.MAX_RESOLUTION
             )
         )
-        
+'''        
     # def clean_image(self):
         # image = self.cleaned_data['image']
         # img = Image.open(image)
@@ -55,7 +56,7 @@ class NotebookAdminForm(ModelForm):
 
 class NotebookAdmin(admin.ModelAdmin):
 
-    form = NotebookAdminForm
+    #form = NotebookAdminForm
     
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'category':
