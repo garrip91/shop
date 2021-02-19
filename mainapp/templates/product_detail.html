@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load specifications %}
+
 {% block content %}
     
     <nav aria-label="breadcrumb" style="background-color: LightGray;" class="navbar navbar-light mt-3 ps-3">
@@ -20,11 +22,14 @@
 			<p>Описание: {{ product.description }}</p>
 		</div>
 		<p class="mt-4">Характеристики:</p>
-		{% if product.category.slug == 'notebooks' %}    
+		{{ product|product_spec }}
+{% comment %}      
+        {% if product.category.slug == 'notebooks' %}    
 			{% include 'notebook_specification.html' %}
 	    {% else %}
 		    {% include 'smartphone_specification.html' %}
 	    {% endif %}
+{% endcomment %}
 	</div>
         
 {% endblock %}
